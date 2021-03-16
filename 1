@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<string.h>
+char copy_ptr(char *buff,const char *buff1,char n)
+{
+	int count;
+	for(count=0;count<n;count++){
+		*buff ++=*buff1++;
+	}
+}//将每行的除省份以外赋值给数组
+
+int main()
+{	
+	FILE *fw=fopen("D:\\yq_in.txt","r");
+	char buff[200];
+	int i = 0;
+	char dest[20];
+	char dest1[20];
+
+	char buff1[200],buff2[200];
+	memset(dest,'\0',sizeof(dest));
+	memset(dest1,'\0',sizeof(dest1));
+	fgets(buff1,200,(FILE*)fw);
+
+	strncpy(dest,buff1,6);//将读出的省份进行赋值其他数组
+	printf("%s\n",dest);//将第一行的省份进行输出
+	for(i;i<=128 ;i++){//读入文件所有
+		fgets(buff,200,(FILE*)fw);
+		if(buff[3]==buff1[3]){
+			copy_ptr(buff2,&buff[7],20);
+			printf("%s",buff2);
+		}//判断前三字符是否相同
+		else{
+			
+			printf("\n");
+			strncpy(dest1,buff,6);
+			printf("%s\n",dest1);
+
+			copy_ptr(buff2,&buff[7],20);
+			printf("%s",buff2);
+			buff1[3] =buff[3];
+		}//不相同则保留 并更换buff1[]的值
+			
+		
+	}
+	
+	
+	
+		
+	
+	
+}
